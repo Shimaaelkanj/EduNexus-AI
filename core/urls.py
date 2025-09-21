@@ -6,4 +6,5 @@ urlpatterns = [
     path("users/", views.users_list, name="users_list"),
     path("list-databases/", views.list_databases, name="list_databases"),
     path("parse/", views.parse_file, name="parse_file"),
+    path("summarize/", views.summarize_text, name="summarize_text"),
 ]
