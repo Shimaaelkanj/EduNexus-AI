@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'core'
 ]
 
 MIDDLEWARE = [
@@ -82,7 +84,7 @@ WSGI_APPLICATION = 'eduNexus.wsgi.application'
 
 
 
-MONGO_DB_NAME = "EduNexusDB"   # or the DB you use in Compass
+MONGO_DB_NAME = "eduNexusDB"   # or the DB you use in Compass
 MONGO_URI = "mongodb://localhost:27017"  # or Atlas URI
 
 MONGO_CLIENT = MongoClient(MONGO_URI)
