@@ -123,3 +123,46 @@ def summarize_text(request):
 
     except Exception as e:
         return Response({"error": f"Summarization failed: {str(e)}"}, status=500)
+    
+# ---------- Add lesson outline (bullet points) ----------
+@api_view(['POST'])
+@parser_classes([JSONParser, FormParser, MultiPartParser])
+def generate_outline(request):
+    text = request.data.get("text")
+    if not text or not text.strip():
+        return Response({"error": "No text provided"}, status=400)
+
+    try:
+        outline = []
+        for chunk in chunk_text(text, 400):
+            chunk_len = len(chunk.split())
+            max_len = max(50, min(400, chunk_len))
+            min_len = min(30, max_len - 10)
+            print("chunk_len:", chunk_len, "max_len:", max_len, "min_len:", min_len)
+            
+            prompt = (
+                "Generate a lesson outline with bullet points based on the following content:\n\n"
+                f"{chunk}\n\n"
+                "Lesson Outline:\n"
+            )
+
+            print(f"Processing chunk of {chunk_len} words")
+
+            result = summarizer(
+                prompt,
+                max_length=max_len,
+                min_length=min_len,
+                do_sample=False
+            )
+
+            outline.append(result[0]["summary_text"])
+
+        return Response({"outline": outline})
+
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return Response({"error": f"Outline generation failed: {str(e)}"}, status=500)
+
+    
+# ---------- Save summaries in DB ----------
