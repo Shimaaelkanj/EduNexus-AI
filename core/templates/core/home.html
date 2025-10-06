@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduNexus AI</title>
+    {% load static %}
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: url("{% static 'images/home_bg.jpg' %}") no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .overlay {
+            height: 100%;
+            width: 100%;
+            background: rgba(0,0,0,0.2); /* subtle transparent overlay */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        /* Box behind text */
+        .text-box {
+            background: rgba(255,255,255,0.2); /* transparent box */
+            padding: 30px 50px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        h1 {
+            color: #000000; /* dark black */
+            font-style: italic;
+            font-size: 4rem;
+            margin: 0;
+            text-shadow: 2px 2px 8px rgba(255,255,255,0.3); /* subtle shadow */
+        }
+
+        p {
+            color: white;
+            font-size: 1.5rem;
+            margin-top: 20px;
+        }
+
+        /* Buttons transparent, hover red */
+        .btn-container {
+            margin-top: 30px;
+        }
+
+        .btn {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 12px 30px;
+            margin: 10px;
+            font-size: 1.2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: red;
+            color: white;
+            border-color: red;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            p {
+                font-size: 1rem;
+            }
+            .btn {
+                font-size: 1rem;
+                padding: 10px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <div class="text-box">
+            <h1>Welcome to EduNexus AI</h1>
+            <p>Your gateway to AI-powered learning</p>
+
+            <div class="btn-container">
+                <a href="{% url 'register_page' %}" class="btn">Register</a>
+                <a href="{% url 'login_page' %}" class="btn">Login</a>
+                <a href="{% url 'lessons_page' %}" class="btn">Lessons</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
