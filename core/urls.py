@@ -1,25 +1,28 @@
 from django.urls import path
 from core import views
-from .views import RegisterView, LoginView, LessonView
-from .views import (UploadFileView, AnalyzeCVView, RoadmapView,
-                    ExportPDFView, ExportDOCXView, ExportPPTXView)
+from .views import RegisterView, LoginView, LessonView,ProfileView
+from .views import UploadView, AnalyzeCVView, RoadmapView, ExportPDFView, ExportDOCXView, ExportPPTXView
+
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 
 urlpatterns = [
     path("register/", RegisterView.as_view(), name="register"),
-    path("login/", LoginView.as_view(), name="login"),
-    path("lessons/", LessonView.as_view(), name="lessons"),
+    #path("login/", LoginView.as_view(), name="login"),
+    #path("lessons/", LessonView.as_view(), name="lessons"),
    # path("upload/", FileUploadView.as_view(), name="upload"),
-    path("upload/", UploadFileView.as_view()),
+   # path("upload/", UploadFileView.as_view()),
     path("analyze_cv/", AnalyzeCVView.as_view()),
     path("roadmap/<str:filename>/", RoadmapView.as_view()),
     path("export/pdf/", ExportPDFView.as_view()),
     path("export/docx/", ExportDOCXView.as_view()),
     path("export/pptx/", ExportPPTXView.as_view()),
-    path("token/", TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path("token/refresh/", TokenRefreshView.as_view(), name='token_refresh')
+    path("login/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path("profile/", ProfileView.as_view(), name="profile")
+
 ]
+
 
 
 
