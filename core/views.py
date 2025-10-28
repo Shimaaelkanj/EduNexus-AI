@@ -15,8 +15,23 @@ from pptx import Presentation
 from pptx.util import Inches
 from core.models import User, Lesson
 from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.tokens import AccessToken, TokenError
 
+def validate_jwt_token(token: str):
+    """
+    Validate and decode a JWT token using SimpleJWT.
 
+    Returns:
+        dict: payload data if token is valid
+    Raises:
+        Exception: if token is invalid or expired
+    """
+    try:
+        access_token = AccessToken(token)
+        payload = access_token.payload  # Decoded claims
+        return payload
+    except TokenError as e:
+        raise Exception(f"❌ Invalid or expired token: {str(e)}")
 
 
 class RegisterView(APIView):
