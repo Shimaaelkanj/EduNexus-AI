@@ -1,0 +1,42 @@
+{
+  "Django": {
+    "duration_weeks": 4,
+    "resources": [
+      {
+        "type": "course",
+        "title": "Django for Beginners",
+        "link": "https://www.youtube.com/watch?v=F5mRW0jo-U4"
+      }
+    ]
+  },
+  "Machine Learning": {
+    "duration_weeks": 6,
+    "resources": [
+      {
+        "type": "course",
+        "title": "Google ML Crash Course",
+        "link": "https://developers.google.com/machine-learning/crash-course"
+      }
+    ]
+  },
+  "Data Structures": {
+    "duration_weeks": 5,
+    "resources": [
+      {
+        "type": "book",
+        "title": "Grokking Algorithms",
+        "link": "https://www.manning.com/books/grokking-algorithms"
+      }
+    ]
+  },
+  "Flask": {
+    "duration_weeks": 3,
+    "resources": [
+      {
+        "type": "video",
+        "title": "Flask Tutorial (Corey Schafer)",
+        "link": "https://www.youtube.com/watch?v=MwZwr5Tvyxo"
+      }
+    ]
+  }
+}

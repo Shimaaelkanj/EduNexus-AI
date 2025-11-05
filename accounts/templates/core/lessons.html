@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lessons - EduNexus AI</title>
+    {% load static %}
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: url("{% static 'images/home_bg.jpg' %}") no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* New gradient overlay for Lessons page */
+        .overlay {
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(rgba(20,0,50,0.4), rgba(0,0,0,0.4));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .text-box {
+            background: rgba(255,255,255,0.15); /* slightly more transparent */
+            padding: 30px 50px;
+            border-radius: 20px;
+            max-width: 700px;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(-30px);
+            animation: slideFadeIn 1s forwards;
+        }
+
+        @keyframes slideFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #ffeb3b; /* golden yellow to distinguish from Home */
+            font-style: italic;
+            font-size: 3.5rem;
+            margin: 0;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        }
+
+        p {
+            color: #fff;
+            font-size: 1.2rem;
+            margin: 15px 0;
+        }
+
+        .input-field, .textarea-field {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border: none;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 25px;
+            border: 2px solid white;
+            background: transparent;
+            color: white;
+            cursor: pointer;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: red;
+            border-color: red;
+        }
+
+        .lessons-list {
+            margin-top: 20px;
+        }
+
+        .lesson-item {
+            background: rgba(50,0,80,0.6); /* darker purple overlay for lesson items */
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: left;
+            opacity: 0;
+            transform: translateX(-50px);
+            animation: itemSlideIn 0.5s forwards;
+        }
+
+        .lesson-item:nth-child(1) { animation-delay: 0.2s; }
+        .lesson-item:nth-child(2) { animation-delay: 0.4s; }
+        .lesson-item:nth-child(3) { animation-delay: 0.6s; }
+        .lesson-item:nth-child(4) { animation-delay: 0.8s; }
+
+        @keyframes itemSlideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .lesson-item h3 {
+            margin: 0;
+            color: #ff4b2b;
+        }
+
+        .lesson-item p {
+            margin: 5px 0 0 0;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            p { font-size: 1rem; }
+            .btn { font-size: 1rem; padding: 10px 25px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <div class="text-box">
+            <h1>Lessons</h1>
+            <p>Add a new lesson and see all lessons below</p>
+
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn">Add Lesson</button>
+            </form>
+
+            <div class="lessons-list">
+                {% for lesson in lessons %}
+                    <div class="lesson-item">
+                        <h3>{{ lesson.title }}</h3>
+                        <p>{{ lesson.description }}</p>
+                        <small>Created at: {{ lesson.created_at }}</small>
+                    </div>
+                {% empty %}
+                    <p>No lessons yet.</p>
+                {% endfor %}
+            </div>
+
+            <div>
+                <a href="{% url 'home' %}" class="btn">Back to Home</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
